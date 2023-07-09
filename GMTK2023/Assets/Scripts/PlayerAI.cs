@@ -23,7 +23,7 @@ public class PlayerAI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentState = State.FreeRoam;
+        currentState = State.Staggered;
         rb = GetComponent<Rigidbody2D>();
         dodgeList = new List<GameObject>();
         anim = GetComponent<Animator>();
@@ -115,7 +115,7 @@ public class PlayerAI : MonoBehaviour
     {
         if (currentState != State.Staggered)
         {
-            if(dodgeList.Count > 0)
+            if (dodgeList.Count > 0)
             {
                 currentState = State.Dodging;
             }

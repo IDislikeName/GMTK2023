@@ -8,11 +8,15 @@ public class Rocket : HasProperties
     public int speed;
     Animator anim;
     public bool moving = false;
+
+    public AudioClip rocket_spawn;
+    public AudioClip rocket_fire;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        SoundManager.instance.PlayClip(rocket_spawn);
     }
 
     // Update is called once per frame
@@ -29,6 +33,7 @@ public class Rocket : HasProperties
     }
     public void Launch()
     {
+        SoundManager.instance.PlayClip(rocket_fire);
         anim.SetBool("Moving",true);
         moving = true;
         StartCoroutine(SelfDestruct());

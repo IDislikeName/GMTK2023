@@ -930,13 +930,19 @@ MonoBehaviour:
 
 '
   type: 1
-  ironDmg: 40
+  ironDmg: 20
   explosion: {fileID: 3507292386307297064, guid: 1a6a1dbff6e40e940bd8aa9a93c6b9c0, type: 3}
   elecDmg: 10
   sprites:
   - {fileID: 21300000, guid: dbf47c9ff5bf5ff4683f976e05956778, type: 3}
   - {fileID: 21300000, guid: ea9ccaeca00d14246bf3ce0ee1a8f0fc, type: 3}
   - {fileID: 21300000, guid: ea9a42ccce1db024fae5e11b301a1eba, type: 3}
+  ironblock_spawn: {fileID: 8300000, guid: f4459be1357fde14f9b0f443cb1e3dc8, type: 3}
+  TNT_spawn: {fileID: 8300000, guid: 31b7463a1c981064780be551f2ff4589, type: 3}
+  lightning_spawn: {fileID: 8300000, guid: 950cf4a2f83f16d4fb1c2d7a410ea57c, type: 3}
+  ironblock_hit: {fileID: 8300000, guid: 47f3571659380bb4dbd6f7c3cc001194, type: 3}
+  TNT_hit: {fileID: 8300000, guid: 419f8495af08b5c4d8be772892126708, type: 3}
+  lightning_hit: {fileID: 8300000, guid: 78da51313087c0d48bae710c1e5769c0, type: 3}
 --- !u!50 &6336217736426878433
 Rigidbody2D:
   serializedVersion: 4

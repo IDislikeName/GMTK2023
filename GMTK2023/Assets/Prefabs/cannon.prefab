@@ -477,6 +477,8 @@ MonoBehaviour:
     That''s about it.'
   shootCD: 3
   bullet: {fileID: 6168325069685449870, guid: 606a22ebc7f0ac145b63bbf2619cc984, type: 3}
+  turret_spawn: {fileID: 8300000, guid: e75ae5b725956d34c9ea4a5908c6343f, type: 3}
+  turret_fire: {fileID: 8300000, guid: 3de201f9ff6e5e446ba8e5b9144dd1d4, type: 3}
 --- !u!61 &4832331151973999572
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -487,7 +489,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

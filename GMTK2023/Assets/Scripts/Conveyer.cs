@@ -6,10 +6,12 @@ public class Conveyer : HasProperties
 {
     public int direction = 1;
     public float force = 10f;
+    public AudioClip conveyor_spawn;
+    public AudioClip conveyor_move;
     // Start is called before the first frame update
     void Start()
     {
-        
+        SoundManager.instance.PlayClip(conveyor_spawn);
     }
 
     // Update is called once per frame
@@ -33,12 +35,14 @@ public class Conveyer : HasProperties
         {
             collision.gameObject.GetComponentInParent<PlayerAI>().currentState = PlayerAI.State.Staggered;
             collision.gameObject.GetComponentInParent<Rigidbody2D>().velocity = transform.up * force;
+            SoundManager.instance.PlayClip(conveyor_move);
         }
         else if (collision.GetComponent<BoxTrap>())
         {
             if (collision.GetComponent<BoxTrap>().type == 1)
             {
                 collision.gameObject.GetComponentInParent<Rigidbody2D>().velocity = transform.up * force;
+                SoundManager.instance.PlayClip(conveyor_move);
             }
         }
     }
@@ -46,6 +50,7 @@ public class Conveyer : HasProperties
     {
         if (collision.CompareTag("Player"))
         {
+
             collision.gameObject.GetComponentInParent<Rigidbody2D>().velocity = Vector2.zero;
             collision.transform.up = transform.up;
             collision.gameObject.GetComponentInParent<PlayerAI>().currentState = PlayerAI.State.FreeRoam;

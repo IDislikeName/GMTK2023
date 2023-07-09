@@ -33,77 +33,95 @@ public class GameManager : MonoBehaviour
         Win,
         Lose,
         Playing,
-        wait,
+        Wait,
     }
     public GameState gState;
 
 
     public TMP_Text n;
     public TMP_Text d;
+
+    public AudioClip bgm;
+    public GameObject startButton;
     // Start is called before the first frame update
     void Start()
     {
         currentHp = maxHp;
         currentTime = maxTime;
         currentSelected = null;
-        gState = GameState.Playing;
+        gState = GameState.Wait;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (currentTime >0)
+        if (gState == GameState.Playing)
         {
-            currentTime -= Time.deltaTime;
-            timeBar.localScale = new Vector3( currentTime,1,1);
-        }
-        else
-        {
-            //lose
-        }
-        if (currentHp <= 0)
-        {
-            //win
-        }
-        else
-        {
-            hpBar.localScale = new Vector3(currentHp, 1, 1);
-        }
-        if (Input.GetMouseButtonDown(0))
-        {
-            if (currentSelected!=null)
+            if (currentTime > 0)
             {
-                if (currentSelected.GetComponent<ItemUI>())
+                currentTime -= Time.deltaTime;
+                timeBar.localScale = new Vector3(currentTime, 1, 1);
+            }
+            else
+            {
+                playerTrans.GetComponent<PlayerAI>().currentState = PlayerAI.State.Staggered;
+                gState = GameState.Lose;
+            }
+            if (currentHp <= 0)
+            {
+                hpBar.localScale = new Vector3(0, 1, 1);
+                playerTrans.GetComponent<PlayerAI>().currentState = PlayerAI.State.Staggered;
+                gState = GameState.Win;
+            }
+            else
+            {
+                hpBar.localScale = new Vector3(currentHp, 1, 1);
+            }
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (currentSelected != null)
                 {
-                    Vector3 mousePos = Input.mousePosition;
-                    mousePos.z = Camera.main.nearClipPlane;
-                    Vector3 worldpos = Camera.main.ScreenToWorldPoint(mousePos);
-                    Vector2 worldpos2D = new Vector2(worldpos.x, worldpos.y);
-                    if (!onUI&&worldpos2D.x > -29f && worldpos2D.x < 18f && worldpos2D.y < 15f && worldpos2D.y > -4.5f)
+                    if (currentSelected.GetComponent<ItemUI>())
                     {
-                        GameObject o = Instantiate(currentSelected.GetComponent<ItemUI>().obj);
-                        o.transform.position = worldpos2D;
-                        currentSelected = null;
+                        Vector3 mousePos = Input.mousePosition;
+                        mousePos.z = Camera.main.nearClipPlane;
+                        Vector3 worldpos = Camera.main.ScreenToWorldPoint(mousePos);
+                        Vector2 worldpos2D = new Vector2(worldpos.x, worldpos.y);
+                        if (!onUI && worldpos2D.x > -29f && worldpos2D.x < 18f && worldpos2D.y < 15f && worldpos2D.y > -4.5f)
+                        {
+                            GameObject o = Instantiate(currentSelected.GetComponent<ItemUI>().obj);
+                            o.transform.position = worldpos2D;
+                            currentSelected = null;
+                        }
+                        else if (!onUI)
+                        {
+                            currentSelected = null;
+                        }
+
                     }
-                    else if (!onUI)
+                    else if (currentSelected.GetComponent<HasProperties>())
                     {
-                        currentSelected = null;
+                        if (!onUI)
+                        {
+                            currentSelected.GetComponent<HasProperties>().pUI.SetActive(false);
+                            n.text = "";
+                            d.text = "";
+                            currentSelected = null;
+                        }
                     }
 
-                }
-                else if (currentSelected.GetComponent<HasProperties>())
-                {
-                    if (!onUI)
-                    {
-                        currentSelected.GetComponent<HasProperties>().pUI.SetActive(false);
-                        n.text = "";
-                        d.text = "";
-                        currentSelected = null;
-                    }
-                }
 
-                
+                }
             }
         }
+        
+        
+    }
+    public void StartGame()
+    {
+        playerTrans.GetComponent<PlayerAI>().currentState = PlayerAI.State.FreeRoam;
+        gState = GameState.Playing;
+        SoundManager.instance.PlayBGM(bgm);
+        startButton.SetActive(false);
     }
 }

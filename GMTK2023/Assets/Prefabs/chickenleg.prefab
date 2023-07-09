@@ -228,6 +228,8 @@ MonoBehaviour:
 
     Also makes for good bait.'
   healAmt: 10
+  chicken_eat: {fileID: 8300000, guid: b77abd5dc22f6ea4c9ed4797dc523799, type: 3}
+  chicken_spawn: {fileID: 8300000, guid: 535b8de99398a344cbd15a09c391c4ef, type: 3}
 --- !u!61 &6511070970872566562
 BoxCollider2D:
   m_ObjectHideFlags: 0

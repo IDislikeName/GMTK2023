@@ -611,6 +611,8 @@ MonoBehaviour:
   d: Pushes objects and player in the launched direction.
   speed: 10
   moving: 0
+  rocket_spawn: {fileID: 8300000, guid: 77804b3b63cabf0439391c6cbb232668, type: 3}
+  rocket_move: {fileID: 8300000, guid: bb3007b7fb822b34482ec850a15a4ca1, type: 3}
 --- !u!61 &8409166413736251597
 BoxCollider2D:
   m_ObjectHideFlags: 0

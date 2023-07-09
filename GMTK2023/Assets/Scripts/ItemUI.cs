@@ -8,13 +8,17 @@ public class ItemUI : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler,
 {
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (GameManager.instance.currentSelected != null && GameManager.instance.currentSelected.GetComponent<HasProperties>())
+        if (GameManager.instance.gState == GameManager.GameState.Playing)
         {
-            GameManager.instance.currentSelected.GetComponent<HasProperties>().pUI.gameObject.SetActive(false);
-            GameManager.instance.n.text = "";
-            GameManager.instance.d.text = "";
+            if (GameManager.instance.currentSelected != null && GameManager.instance.currentSelected.GetComponent<HasProperties>())
+            {
+                GameManager.instance.currentSelected.GetComponent<HasProperties>().pUI.gameObject.SetActive(false);
+                GameManager.instance.n.text = "";
+                GameManager.instance.d.text = "";
+            }
+            GameManager.instance.currentSelected = gameObject;
         }
-        GameManager.instance.currentSelected = gameObject;
+        
     }
 
     public GameObject obj;

@@ -13,17 +13,21 @@ public class HasProperties : MonoBehaviour
 
     private void OnMouseDown()
     {
-        if (GameManager.instance.currentSelected != null && GameManager.instance.currentSelected.GetComponent<HasProperties>())
+        if (GameManager.instance.gState == GameManager.GameState.Playing)
         {
-            GameManager.instance.currentSelected.GetComponent<HasProperties>().pUI.gameObject.SetActive(false);
-            GameManager.instance.n.text = "";
-            GameManager.instance.d.text = "";
+            if (GameManager.instance.currentSelected != null && GameManager.instance.currentSelected.GetComponent<HasProperties>())
+            {
+                GameManager.instance.currentSelected.GetComponent<HasProperties>().pUI.gameObject.SetActive(false);
+                GameManager.instance.n.text = "";
+                GameManager.instance.d.text = "";
+            }
+
+            GameManager.instance.currentSelected = gameObject;
+            pUI.SetActive(true);
+            GameManager.instance.n.text = n;
+            GameManager.instance.d.text = d;
         }
-            
-        GameManager.instance.currentSelected = gameObject;
-        pUI.SetActive(true);
-        GameManager.instance.n.text = n;
-        GameManager.instance.d.text = d;
+        
     }
     public void OnMouseExit()
     {

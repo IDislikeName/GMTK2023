@@ -11,11 +11,25 @@ public class BoxTrap : HasProperties
     public int elecDmg = 10;
     public Sprite[] sprites;
     SpriteRenderer sr;
+
+    public AudioClip ironblock_spawn;
+    public AudioClip TNT_spawn;
+    public AudioClip lightning_spawn;
+    public AudioClip ironblock_hit;
+    public AudioClip TNT_hit;
+    public AudioClip lightning_hit;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         sr = GetComponent<SpriteRenderer>();
+        StartCoroutine(Die());
+        SoundManager.instance.PlayClip(ironblock_spawn);
+    }
+    IEnumerator Die()
+    {
+        yield return new WaitForSeconds(7f);
+        Destroy(gameObject);
     }
 
     // Update is called once per frame
@@ -35,21 +49,25 @@ public class BoxTrap : HasProperties
     {
         if (type == 1)
         {
-            if (collision.gameObject.CompareTag("Player"))
+            if (collision.collider.CompareTag("Player"))
             {
-                if (rb.velocity.magnitude > 4)
+                if (rb.velocity.magnitude>4f)
                 {
                     GameManager.instance.currentHp -= ironDmg;
+                    SoundManager.instance.PlayClip(ironblock_hit);
+                    Destroy(gameObject);
                 }
             }
         }
 
         if (type == 3)
         {
-            if(collision.gameObject.CompareTag("Player"))
+            if(collision.collider.CompareTag("Player"))
             {
                 //anim.SetTrigger("Hurt");
                 GameManager.instance.currentHp -= elecDmg;
+                SoundManager.instance.PlayClip(lightning_hit);
+                Destroy(gameObject);
             }
         }
         
@@ -58,19 +76,22 @@ public class BoxTrap : HasProperties
     {
         GameObject e =  Instantiate(explosion);
         e.transform.position = transform.position;
+        SoundManager.instance.PlayClip(TNT_hit);
         Destroy(gameObject);
     }
 
     public void Iron()
     {
         type = 1;
+        SoundManager.instance.PlayClip(ironblock_spawn);
     }
     public void TNT()
     {
         type = 2;
+        SoundManager.instance.PlayClip(TNT_spawn);
     }
     public void Electric()
     {
-        type = 3;
+        type = 3; SoundManager.instance.PlayClip(lightning_spawn);
     }
 }

@@ -644,6 +644,10 @@ MonoBehaviour:
   isTriggerMine: 0
   explosion_trigger: {fileID: 4159251673755147614, guid: 0ef0ab0eac8f6c047936f581bf16f4de, type: 3}
   explosion_dynamite: {fileID: 2817615652530265610, guid: 31f0c727494b7b54ea72996a3c39f243, type: 3}
+  trigger_spawn: {fileID: 8300000, guid: 497cd6332b3d5e5418d24b687e49c601, type: 3}
+  trigger_impact: {fileID: 8300000, guid: 5e453785ce043884dba75b1e9825874c, type: 3}
+  dynamite_spawn: {fileID: 8300000, guid: 02272fbb056a8a84da957aabade61c53, type: 3}
+  dynamite_impact: {fileID: 8300000, guid: bb5020a8a0f883044b18b99b0715a57d, type: 3}
 --- !u!61 &7306036001013962397
 BoxCollider2D:
   m_ObjectHideFlags: 0

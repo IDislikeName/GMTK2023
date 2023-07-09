@@ -7,10 +7,16 @@ public class Mine : HasProperties
     public bool isTriggerMine = false;
     public GameObject explosion_trigger;
     public GameObject explosion_dynamite;
+
+    public AudioClip trigger_spawn;
+    public AudioClip trigger_impact;
+
+    public AudioClip dynamite_spawn;
+    public AudioClip dynamite_impact;
     // Start is called before the first frame update
     void Start()
     {
-        
+        SoundManager.instance.PlayClip(dynamite_spawn);
 
     }
 
@@ -37,10 +43,12 @@ public class Mine : HasProperties
         GameObject o;
         if (isTriggerMine)
         {
+            SoundManager.instance.PlayClip(trigger_impact);
             o = Instantiate(explosion_trigger);
         }
         else
         {
+            SoundManager.instance.PlayClip(dynamite_impact);
             o = Instantiate(explosion_dynamite);
         }
         
@@ -50,11 +58,13 @@ public class Mine : HasProperties
 
     public void SetTrigger()
     {
+        SoundManager.instance.PlayClip(trigger_spawn);
         isTriggerMine = true;
         GetComponent<Animator>().SetBool("IsTrigger",true);
     }
     public void SetDynamite()
     {
+        SoundManager.instance.PlayClip(dynamite_spawn);
         isTriggerMine = false;
         GetComponent<Animator>().SetBool("IsTrigger", false);
     }

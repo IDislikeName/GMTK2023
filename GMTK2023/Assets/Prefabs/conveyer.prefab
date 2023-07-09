@@ -496,6 +496,8 @@ MonoBehaviour:
   d: A Conveyor belt that pushes everything in a set direction.
   direction: 1
   force: 50
+  conveyor_spawn: {fileID: 8300000, guid: 6cef1ebe025a2d74499499156d952a17, type: 3}
+  conveyor_move: {fileID: 8300000, guid: aedd6a435d459384a972c05d973f0634, type: 3}
 --- !u!61 &6439570559015844010
 BoxCollider2D:
   m_ObjectHideFlags: 0
