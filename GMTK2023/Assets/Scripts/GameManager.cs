@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -43,6 +44,9 @@ public class GameManager : MonoBehaviour
 
     public AudioClip bgm;
     public GameObject startButton;
+
+    public GameObject LoseScreen;
+    public GameObject WinScreen;
     // Start is called before the first frame update
     void Start()
     {
@@ -64,14 +68,12 @@ public class GameManager : MonoBehaviour
             }
             else
             {
-                playerTrans.GetComponent<PlayerAI>().currentState = PlayerAI.State.Staggered;
-                gState = GameState.Lose;
+                Lose();
+                
             }
             if (currentHp <= 0)
             {
-                hpBar.localScale = new Vector3(0, 1, 1);
-                playerTrans.GetComponent<PlayerAI>().currentState = PlayerAI.State.Staggered;
-                gState = GameState.Win;
+                Win();
             }
             else
             {
@@ -123,5 +125,28 @@ public class GameManager : MonoBehaviour
         gState = GameState.Playing;
         SoundManager.instance.PlayBGM(bgm);
         startButton.SetActive(false);
+    }
+    public void MainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
+    public void Lose()
+    {
+        playerTrans.GetComponent<PlayerAI>().currentState = PlayerAI.State.Staggered;
+        gState = GameState.Lose;
+        LoseScreen.SetActive(true);
+
+    }
+    public void Win()
+    {
+        hpBar.localScale = new Vector3(0, 1, 1);
+        playerTrans.GetComponent<PlayerAI>().currentState = PlayerAI.State.Staggered;
+        gState = GameState.Win;
+        WinScreen.SetActive(true);
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(1);
     }
 }

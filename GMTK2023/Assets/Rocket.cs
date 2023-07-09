@@ -16,7 +16,6 @@ public class Rocket : HasProperties
     {
         rb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-        SoundManager.instance.PlayClip(rocket_spawn);
     }
 
     // Update is called once per frame
