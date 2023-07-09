@@ -28,6 +28,14 @@ public class Explosion : MonoBehaviour
         {
             GameManager.instance.currentHp -= dmg;
         }
+        if (collision.GetComponent<BoxTrap>())
+        {
+            if (collision.GetComponent<BoxTrap>().type == 2)
+            {
+                collision.GetComponent<BoxTrap>().Explode();
+            }
+            Destroy(gameObject);
+        }
         inexplosion = Physics2D.OverlapCircleAll(transform.position, exploradius);
 
 

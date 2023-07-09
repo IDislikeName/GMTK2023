@@ -43,13 +43,7 @@ public class BoxTrap : HasProperties
                 }
             }
         }
-        if (type == 2)
-        {
-            if (collision.gameObject.CompareTag("Trigger") || collision.gameObject.GetComponent<Bullet>())
-            {
-                Explode();
-            }
-        }
+
         if (type == 3)
         {
             if(collision.gameObject.CompareTag("Player"))

@@ -26,5 +26,13 @@ public class Bullet : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        if (collision.GetComponent<BoxTrap>())
+        {
+            if (collision.GetComponent<BoxTrap>().type == 2)
+            {
+                collision.GetComponent<BoxTrap>().Explode();
+            }
+            Destroy(gameObject);
+        }
     }
 }
