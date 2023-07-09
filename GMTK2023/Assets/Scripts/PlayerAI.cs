@@ -61,10 +61,10 @@ public class PlayerAI : MonoBehaviour
             {
                 currentTimer += Time.deltaTime;
             }
-            /*if (rb.velocity == Vector2.zero)
+            if (rb.velocity == Vector2.zero)
             {
                 currentTimer = changeDirTimer;
-            }*/
+            }
         }
         else if(currentState == State.Dodging)
         {
@@ -105,9 +105,14 @@ public class PlayerAI : MonoBehaviour
         {
             anim.SetInteger("Vertical", 1);
         }
-        else
+        else if(rb.velocity.y <0)
         {
             anim.SetInteger("Vertical", -1);
+        }
+        else
+        {
+            anim.SetInteger("Vertical", 0);
+
         }
     }
 
