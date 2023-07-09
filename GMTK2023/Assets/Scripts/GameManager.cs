@@ -1,7 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
+using TMPro;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -18,22 +19,55 @@ public class GameManager : MonoBehaviour
 
     public int maxHp = 100;
     public float currentHp;
+    public RectTransform hpBar;
+
+    public int maxTime = 180;
+    public float currentTime;
+    public RectTransform timeBar;
 
     public GameObject currentSelected;
     public bool onUI;
+
+    public enum GameState
+    {
+        Win,
+        Lose,
+        Playing,
+        wait,
+    }
+    public GameState gState;
+
+
+    public TMP_Text n;
+    public TMP_Text d;
     // Start is called before the first frame update
     void Start()
     {
         currentHp = maxHp;
+        currentTime = maxTime;
         currentSelected = null;
+        gState = GameState.Playing;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (currentTime >0)
+        {
+            currentTime -= Time.deltaTime;
+            timeBar.localScale = new Vector3( currentTime,1,1);
+        }
+        else
+        {
+            //lose
+        }
         if (currentHp <= 0)
         {
-            //die
+            //win
+        }
+        else
+        {
+            hpBar.localScale = new Vector3(currentHp, 1, 1);
         }
         if (Input.GetMouseButtonDown(0))
         {
@@ -62,6 +96,8 @@ public class GameManager : MonoBehaviour
                     if (!onUI)
                     {
                         currentSelected.GetComponent<HasProperties>().pUI.SetActive(false);
+                        n.text = "";
+                        d.text = "";
                         currentSelected = null;
                     }
                 }
