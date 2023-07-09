@@ -34,13 +34,20 @@ public class Conveyer : HasProperties
             collision.gameObject.GetComponentInParent<PlayerAI>().currentState = PlayerAI.State.Staggered;
             collision.gameObject.GetComponentInParent<Rigidbody2D>().velocity = transform.up * force;
         }
-        
+        else if (collision.GetComponent<BoxTrap>())
+        {
+            if (collision.GetComponent<BoxTrap>().type == 1)
+            {
+                collision.gameObject.GetComponentInParent<Rigidbody2D>().velocity = transform.up * force;
+            }
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
             collision.gameObject.GetComponentInParent<Rigidbody2D>().velocity = Vector2.zero;
+            collision.transform.up = transform.up;
             collision.gameObject.GetComponentInParent<PlayerAI>().currentState = PlayerAI.State.FreeRoam;
         }
     }
