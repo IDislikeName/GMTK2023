@@ -565,6 +565,8 @@ MonoBehaviour:
   timeBar: {fileID: 1419186589}
   currentSelected: {fileID: 0}
   onUI: 0
+  WinMus: {fileID: 8300000, guid: 8ac08035d49084f4da90f1a007dba8be, type: 3}
+  LoseMus: {fileID: 8300000, guid: 842417e549dbe9142aeae77262844df5, type: 3}
   gState: 0
   n: {fileID: 1728609941}
   d: {fileID: 860233624}

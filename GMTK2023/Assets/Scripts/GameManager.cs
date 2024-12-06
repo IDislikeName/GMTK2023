@@ -29,6 +29,9 @@ public class GameManager : MonoBehaviour
     public GameObject currentSelected;
     public bool onUI;
 
+
+    public AudioClip WinMus;
+    public AudioClip LoseMus;
     public enum GameState
     {
         Win,
@@ -135,6 +138,8 @@ public class GameManager : MonoBehaviour
         playerTrans.GetComponent<PlayerAI>().currentState = PlayerAI.State.Staggered;
         gState = GameState.Lose;
         LoseScreen.SetActive(true);
+        SoundManager.instance.BGM.Stop();
+        SoundManager.instance.PlayClip(LoseMus);
 
     }
     public void Win()
@@ -143,6 +148,8 @@ public class GameManager : MonoBehaviour
         playerTrans.GetComponent<PlayerAI>().currentState = PlayerAI.State.Staggered;
         gState = GameState.Win;
         WinScreen.SetActive(true);
+        SoundManager.instance.BGM.Stop();
+        SoundManager.instance.PlayClip(WinMus);
     }
 
     public void Restart()
